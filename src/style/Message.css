@@ -1,0 +1,27 @@
+.message{
+    border-radius: 25px;
+    width: fit-content;
+    margin: 5px;
+    padding: 10px;
+    max-width: 70wh;
+    color: white;
+    
+}
+
+.userMsg{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.userMsg>.message{
+    background-image: linear-gradient(to right,#23a8eb, #5e7beb);
+}
+
+.asisstantMsg{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.asisstantMsg>.message{
+    background-color: #34394c
+}
