@@ -36,7 +36,7 @@ const App = () => {
         <header className='header'> <span className='name'>G.A.M</span> <span className='credit'>Made by Eslam</span></header>
         <div className='chat-container'>
           {userMessages.map(message => <Message body={message} classNam='userMsg' />)}
-          {AIres.map(message => <Message body={`${message}`} classNam='AiMsg' />)}
+          {AIres.map(message => <Message body={message} classNam='AiMsg' />)}
         </div>
 
         <div className='input'>
