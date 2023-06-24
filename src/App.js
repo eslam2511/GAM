@@ -24,7 +24,8 @@ const App = () => {
         ...AImessages
       ]
       const response = await axios.post(url, messages)
-      setAIres([...AIres, response])
+      const data = response.data
+      setAIres([...AIres, data])
 
     })()
   }, [AImessages])
