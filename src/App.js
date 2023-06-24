@@ -21,7 +21,7 @@ const App = () => {
    (async ()=>{
       const url = 'https://gpt.eslamahmed19.repl.co/api'
       let messages = [
-        {role : "system", content: "you are helpful assistant your name is GAM which stands for Genius AI Model you are developed by only one developer called eslam and remember always response in markdown"},
+        {role : "system", content: "you are helpful assistant your name is GAM which stands for Genius AI Model you are developed by only one developer called eslam"},
         ...AImessages
       ]
       const response = await axios.post(url, messages)
