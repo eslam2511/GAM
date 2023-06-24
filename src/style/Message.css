@@ -17,11 +17,11 @@
     background-image: linear-gradient(to right,#23a8eb, #5e7beb);
 }
 
-.asisstantMsg{
+.AiMsg{
     display: flex;
     justify-content: flex-start;
 }
 
-.asisstantMsg>.message{
-    background-color: #34394c
+.AiMsg>.message{
+    background-color: #000000
 }

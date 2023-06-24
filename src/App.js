@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import axios from 'axios';
 import Message from './components/Message';
 import './style/App.css';
 import { ReactComponent as SendIcon } from './send.svg';
@@ -6,14 +7,27 @@ import { ReactComponent as SendIcon } from './send.svg';
 const App = () => {
   const [inputValue, setInputValue] = useState('')
   const [userMessages, setUserMessages] = useState([])
+  const [AImessages, setAImessages] = useState([{role: "user", content: "hello there"}])
+  const [AIres, setAIres] = useState([])
 
-  const insertMessage = () => setUserMessages([...userMessages, inputValue])
-  const handleKeyPress = (event) => {
-    if (event.key === 'Enter') {
-      event.preventDefault();
-      setInputValue(inputValue + `\n`);
-    }
-  };
+
+  const insertMessage = async () => {
+    setUserMessages([...userMessages, inputValue])
+    setAImessages([...AImessages, {role: "user", content: `${inputValue}`}])
+  }
+
+  useEffect(()=>{
+   (async ()=>{
+      const url = 'https://gpt.eslamahmed19.repl.co/api'
+      let messages = [
+        {role : "system", content: "you are helpful assistant your name is GAM which stands for Genius AI Model"},
+        ...AImessages
+      ]
+      const response = await axios.post(url, messages)
+      setAIres([...AIres, response])
+
+    })()
+  }, [AImessages])
 
   return (
     <>
@@ -21,6 +35,7 @@ const App = () => {
         <header className='header'> <span className='name'>G.A.M</span> <span className='credit'>Made by Eslam</span></header>
         <div className='chat-container'>
           {userMessages.map(message => <Message body={message} classNam='userMsg' />)}
+          {AIres.map(message => <Message body={`${message}`} classNam='AiMsg' />)}
         </div>
 
         <div className='input'>
@@ -29,9 +44,7 @@ const App = () => {
             placeholder='hello there...'
             value={inputValue}
             onChange={e => setInputValue(e.target.value)}
-            onKeyDown={handleKeyPress}
-            rows={4} // Specify the number of visible rows as needed
-            style={{ resize: 'vertical' }} // Allow vertical resizing
+
           />
 
           <button
