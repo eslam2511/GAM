@@ -8,23 +8,14 @@ const App = () => {
   const [inputValue, setInputValue] = useState('')
   const [Messages, setMessages] = useState([])
   const [AImessages, setAImessages] = useState([])
-  const [sendbtn, setSendbtn] = useState(null);
 
 
   const insertMessage = () => {
     if (inputValue === '') return
     setMessages(prevMessages => [...prevMessages, { text: inputValue, classname: 'userMsg' }]);
     setAImessages(prevState => [...prevState, { role: "user", content: `${inputValue}` }])
+    setInputValue('')
   }
-  
-  useEffect(() => {
-    const button = (
-      <button className='send' onClick={insertMessage}>
-        <SendIcon className='sendIcon' />
-      </button>
-    );
-    setSendbtn(button); // Update sendbtn whenever inputValue changes
-  }, [inputValue]);
 
   useEffect(() => {
     if (!AImessages[0]) return;
@@ -43,6 +34,11 @@ const App = () => {
     })()
   }, [AImessages])
   
+  const button = (
+    <button className='send' onClick={insertMessage}>
+      <SendIcon className='sendIcon' />
+    </button>
+  );
 
   return (
     <>
@@ -57,13 +53,11 @@ const App = () => {
             className='input-field'
             placeholder='hello there...'
             value={inputValue}
-            onChange={e => {setInputValue(e.target.value)
-              console.log(inputValue);
-            }}
+            onChange={e => setInputValue(e.target.value)}
 
           />
 
-          {sendbtn}
+          {button}
 
         </div>
 
