@@ -20,7 +20,7 @@ const App = () => {
   useEffect(() => {
     if (!AImessages[0]) return;
     (async () => {
-      const url = 'https://gpt.eslamahmed19.repl.co/api'
+      const url = 'https://api.eslamahmed19.repl.co/chat'
       let messages = [
         { role: "system", content: "you are helpful assistant your name is GAM which stands for Genius AI Model you are developed by only one developer called eslam" },
         ...AImessages
