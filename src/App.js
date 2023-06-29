@@ -8,6 +8,7 @@ const App = () => {
   const [inputValue, setInputValue] = useState('')
   const [Messages, setMessages] = useState([])
   const [AImessages, setAImessages] = useState([])
+  const [loadingBtn, setLoadingBtn] = useState(false)
 
 
   const insertMessage = () => {
@@ -15,6 +16,7 @@ const App = () => {
     setMessages(prevMessages => [...prevMessages, { text: inputValue, classname: 'userMsg' }]);
     setAImessages(prevState => [...prevState, { role: "user", content: `${inputValue}` }])
     setInputValue('')
+    setLoadingBtn(true)
   }
 
   useEffect(() => {
@@ -30,6 +32,7 @@ const App = () => {
   
       if (data) {
         setMessages(prevState => [...prevState, { text: data, classname: 'AiMsg' }])
+        setLoadingBtn(false)
       }
     })()
   }, [AImessages])
@@ -57,7 +60,7 @@ const App = () => {
 
           />
 
-          {button}
+          {loadingBtn ? <div>🚫</div> : button}
 
         </div>
 
