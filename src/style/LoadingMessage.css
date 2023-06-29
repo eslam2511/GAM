@@ -1,0 +1,46 @@
+.loader-container{
+    width: 100%;
+    border-radius: 25px;
+    width: fit-content;
+    margin: 5px;
+    padding: 10px;
+    max-width: 70vw;
+    background-color: #000000
+}
+
+.loader {
+    height: 24px;
+    display: flex;
+}
+
+.circle {
+    display: flex;
+    align-items: center;
+    width: 10px;
+    height: 10px;
+    background: white;
+    border-radius: 50%;
+    margin: 0 5px;
+    margin-top: 10px;
+    animation: jump 1s linear infinite
+}
+
+@keyframes jump {
+  0% {
+    margin-top: 10px;
+  }
+  35% {
+    margin-top: 0px;
+  }
+  70% {
+    margin-top:10px;
+  }
+}
+
+
+#b {
+  animation-delay: 0.2s;
+}
+#c {
+  animation-delay: 0.4s;
+}
