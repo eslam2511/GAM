@@ -1,6 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef  } from 'react'
 import axios from 'axios';
 import Message from './components/Message';
+import LoadingButton from './components/LoadingButton';
+import LoadingMessage from './components/LoadingMessage';
 import './style/App.css';
 import { ReactComponent as SendIcon } from './send.svg';
 
@@ -8,16 +10,30 @@ const App = () => {
   const [inputValue, setInputValue] = useState('')
   const [Messages, setMessages] = useState([])
   const [AImessages, setAImessages] = useState([])
+  const [InvokAI, setInvokAI] = useState(false);
   const [loadingBtn, setLoadingBtn] = useState(false)
+  const [loadingMsg, setLoadingMsg] = useState(false)
+  const scrollRef = useRef(null);
 
 
   const insertMessage = () => {
     if (inputValue === '') return
     setMessages(prevMessages => [...prevMessages, { text: inputValue, classname: 'userMsg' }]);
-    setAImessages(prevState => [...prevState, { role: "user", content: `${inputValue}` }])
+    setAImessages(prevState => [...prevState, { role: "user", content: inputValue }])
     setInputValue('')
+    InvokAI ? setInvokAI(false) : setInvokAI(true)
     setLoadingBtn(true)
+    setLoadingMsg(true)
   }
+
+  const handleInputHeight = (event) => {
+    const lines = event.target.value.split('\n').length;
+    if (lines <= 8) {
+      if(lines === 1) return
+      event.target.style.height = 'auto';
+      event.target.style.height = `${event.target.scrollHeight}px`;
+    }
+  };
 
   useEffect(() => {
     if (!AImessages[0]) return;
@@ -27,21 +43,37 @@ const App = () => {
         { role: "system", content: "you are helpful assistant your name is GAM which stands for Genius AI Model you are developed by only one developer called eslam" },
         ...AImessages
       ]
-      const response = await axios.post(url, messages)
-      const data = response.data
-  
-      if (data) {
-        setMessages(prevState => [...prevState, { text: data, classname: 'AiMsg' }])
+      try {
+        const response = await axios.post(url, messages)
+        const data = response.data
+
+        if (data) {
+          setMessages(prevState => [...prevState, { text: data, classname: 'AiMsg' }])
+          setAImessages(prevState => [...prevState, { role: "assistant", content: data }])
+          setLoadingBtn(false)
+          setLoadingMsg(false)
+        }
+      } catch (error) {
+        setMessages(prevState => [...prevState, { text: 'Error please try again later', classname: 'AiMsg' }])
         setLoadingBtn(false)
+        setLoadingMsg(false)
       }
     })()
-  }, [AImessages])
+  }, [InvokAI])
+
+  useEffect(() => {
+    scrollRef.current.scrollIntoView({ behavior: 'smooth' });
   
+    
+  }, [Messages]);
+
   const button = (
     <button className='send' onClick={insertMessage}>
       <SendIcon className='sendIcon' />
     </button>
   );
+
+  const loadingButton = <LoadingButton />
 
   return (
     <>
@@ -49,18 +81,25 @@ const App = () => {
         <header className='header'> <span className='name'>G.A.M</span> <span className='credit'>Made by Eslam</span></header>
         <div className='chat-container'>
           {Messages.map((message, index) => <Message key={index} body={message.text} classNam={message.classname} />)}
+          {loadingMsg ? <LoadingMessage /> : <></>}
+          <div ref={scrollRef} ></div>
         </div>
 
         <div className='input'>
-          <input
+          <textarea
             className='input-field'
             placeholder='hello there...'
             value={inputValue}
-            onChange={e => setInputValue(e.target.value)}
+            onChange={e => {
+              setInputValue(e.target.value)
+              handleInputHeight(e)
+            }}
+            onBlur={e=> e.target.style.height = `40px`}
+            type='text'
 
           />
 
-          {loadingBtn ? <div>🚫</div> : button}
+          {loadingBtn ? loadingButton : button}
 
         </div>
 
