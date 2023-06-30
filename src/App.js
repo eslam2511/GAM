@@ -14,7 +14,6 @@ const App = () => {
   const [loadingBtn, setLoadingBtn] = useState(false)
   const [loadingMsg, setLoadingMsg] = useState(false)
   const scrollRef = useRef(null);
-  const inputRef = useRef(null)
 
 
   const insertMessage = () => {
@@ -22,7 +21,6 @@ const App = () => {
     setMessages(prevMessages => [...prevMessages, { text: inputValue, classname: 'userMsg' }]);
     setAImessages(prevState => [...prevState, { role: "user", content: inputValue }])
     setInputValue('')
-    inputRef.current.focus();
     InvokAI ? setInvokAI(false) : setInvokAI(true)
     setLoadingBtn(true)
     setLoadingMsg(true)
@@ -98,8 +96,6 @@ const App = () => {
             }}
             onBlur={e=> e.target.style.height = `40px`}
             type='text'
-            ref={inputRef}
-
           />
 
           {loadingBtn ? loadingButton : button}
