@@ -1,36 +1,44 @@
-.message{
+.message {
     border-radius: 30px;
     width: fit-content;
     margin: 5px;
-    padding: 5px;
-    max-width: 70vw;
+    padding-left: 10px;
+    padding-right: 10px;
+    max-width: 50vw;
     color: white;
-   font-size: 15px;
-    
+    font-size: 15px;
+    line-height: 19px;
+
 }
 
-.userMsg{
+.userMsg {
     display: flex;
     justify-content: flex-end;
 }
 
-.userMsg>.message{
-    background-image: linear-gradient(to right,#23a8eb, #5e7beb);
+.userMsg>.message {
+    background-image: linear-gradient(to right, #23a8eb, #5e7beb);
 }
 
-.AiMsg{
+.AiMsg {
     display: flex;
     justify-content: flex-start;
 }
 
-.AiMsg>.message{
+.AiMsg>.message {
     background-color: #000000
 }
 
 
 @media (max-width: 450px) {
-    .message{
+    .message {
         max-width: 90vw;
     }
 }
+
+@media (min-width: 450px) and (max-width: 850px) {
+    .message {
+        max-width: 70vw;
+    }
+  }
   

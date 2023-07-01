@@ -3,6 +3,7 @@ import axios from 'axios';
 import Message from './components/Message';
 import LoadingButton from './components/LoadingButton';
 import LoadingMessage from './components/LoadingMessage';
+import TopBar from './components/TopBar';
 import './style/App.css';
 import { ReactComponent as SendIcon } from './send.svg';
 
@@ -78,7 +79,8 @@ const App = () => {
   return (
     <>
       <div className='container'>
-        <header className='header'> <span className='name'>G.A.M</span> <span className='credit'>Made by Eslam</span></header>
+        <TopBar />
+        <div className='fix-topBar'> fix top bar</div>
         <div className='chat-container'>
           {Messages.map((message, index) => <Message key={index} body={message.text} classNam={message.classname} />)}
           {loadingMsg ? <LoadingMessage /> : <></>}
