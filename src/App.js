@@ -3,6 +3,7 @@ import axios from 'axios';
 import Message from './components/Message';
 import LoadingButton from './components/LoadingButton';
 import LoadingMessage from './components/LoadingMessage';
+import SideMenu from './components/SideMenu';
 import TopBar from './components/TopBar';
 import './style/App.css';
 import { ReactComponent as SendIcon } from './send.svg';
@@ -39,7 +40,7 @@ const App = () => {
   useEffect(() => {
     if (!AImessages[0]) return;
     (async () => {
-      const url = 'https://api.eslamahmed19.repl.co/chat'
+      const url = 'https://chat.eslamahmed19.repl.co/chat'
       let messages = [
         { role: "system", content: "you are helpful assistant your name is GAM which stands for Genius AI Model you are developed by only one developer called eslam" },
         ...AImessages
@@ -78,6 +79,7 @@ const App = () => {
 
   return (
     <>
+    <SideMenu />
       <div className='container'>
         <TopBar />
         <div className='fix-topBar'> fix top bar</div>

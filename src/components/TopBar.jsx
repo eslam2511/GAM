@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { ReactComponent } from '../SideMenuButton.svg';
 import '../style/TopBar.css';
 
 const TopBar = () => {
@@ -27,7 +28,13 @@ const TopBar = () => {
 
   return (
     <div className={`top-bar ${isHidden ? 'hidden' : ''}`}>
-      <header className='header'> <span className='name'>G.A.M</span> <span className='credit'>Made by Eslam</span></header>
+      <header className='header'>
+        <span className='name'>G.A.M</span>
+        <span className='credit'>Made by Eslam</span>
+      </header>
+      <button className='sideBarButton'>
+        <ReactComponent className='sideBarButtonIcon'  />
+      </button>
     </div>
   );
 };
