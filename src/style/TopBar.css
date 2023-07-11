@@ -15,7 +15,7 @@
 }
 
 .top-bar.hidden {
-    transform: translateY(-60px);
+    transform: translateY(-75px);
 }
 
 .header {
@@ -59,4 +59,5 @@
     position: fixed;
     top: 0px;
     right: -300px;
+    transition: 0.3s;
 }

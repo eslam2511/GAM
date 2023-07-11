@@ -33,7 +33,7 @@
   background-color: #18191d;
   color: #838897;
   font-size: large;
-  padding: 20px 10px 0px 10px;
+  padding: 20px 40px 0px 10px;
   resize: none;
   scrollbar-width: 0px;
   scrollbar-color: transparent transparent;
@@ -61,4 +61,28 @@ textarea::-webkit-scrollbar-thumb {
   width: 30px;
   height: 30px;
   color: white;
+}
+
+.settingsMenu{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  /*margin-left: -130px;*/
+  margin-left: -50px;
+  margin-right: 10px;
+  padding: 2px;
+  /*width: 115px;*/
+  max-width: 35px;
+  border-radius: 25px;
+  background-color: #272b34;
+  overflow: hidden;
+  transition: 0.1s;
+}
+
+.settingsMenu .icon{
+  width: 25px;
+  height: 25px;
+  min-width: 25px;
+  min-height: 25px;
+  margin: 5px;
 }
